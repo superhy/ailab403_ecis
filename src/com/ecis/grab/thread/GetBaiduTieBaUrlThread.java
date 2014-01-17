@@ -43,15 +43,17 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 
 		Document docRoot = GetJsoupDocument.getDocument(urlBa);
 
+		// 用于存储该吧所有帖子链接的哈希表
+		Set<String> listUrlPage = new HashSet<String>();
+
 		// 获取分页区域信息
 		Element elePager = docRoot.getElementById("frs_list_pager");
+
 		// 判断此吧被封（找不到任何分页任何）的情况
 		if (elePager == null) {
 			return null;
 		}
 
-		// 用于存储该吧所有帖子链接的哈希表
-		Set<String> listUrlPage = new HashSet<String>();
 		// 第1页为该吧首页本身
 		listUrlPage.add(urlBa);
 
@@ -63,7 +65,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 		while (numPageNow < numPageGrab) {
 			// 检查如果没有下一页这一标识，直接跳出
 			Elements elesNext = elePager.select("a.next");
-			if (elesNext == null) {
+			if (elesNext.size() == 0) {
 				break;
 			}
 
@@ -76,7 +78,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 			elePager = GetJsoupDocument.getDocument(urlNext).getElementById(
 					"frs_list_pager");
 		}
-		
+
 		for (String string : listUrlPage) {
 			System.out.println(string);
 		}
@@ -102,7 +104,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 
 			listUrlPost.add(urlModelPost);
 
-			System.out.println(urlPost);
+			// System.out.println(urlPost);
 		}
 
 		return listUrlPost;

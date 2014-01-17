@@ -54,9 +54,11 @@ public class GrabBaiduTieBaImpl {
 		// themesUrlSet.add(urlModel);
 		// }
 
-		// 获取分页url列表，选取前3页（按最近流行排序），第一也是种子url本省
+		// 获取分页url列表，选取前numPageSet_Ba页（按最近流行排序），第一也是种子url本省
+		int numPageSet_Ba = 1;
+
 		List<Element> listElePage = docSeed.getElementsByClass("pagination")
-				.select("a[href]").subList(0, 2);
+				.select("a[href]").subList(0, numPageSet_Ba - 1);
 
 		List<String> listUrlPage = new ArrayList<String>();
 		listUrlPage.add(seedUrl);
@@ -106,7 +108,7 @@ public class GrabBaiduTieBaImpl {
 		System.out.println("叶子主题url加载完成...");
 
 		// 创建线程池
-		ExecutorService exes = Executors.newSingleThreadExecutor();
+		ExecutorService exes = Executors.newCachedThreadPool();
 		Set<Future<Set<Url>>> setThread = new HashSet<Future<Set<Url>>>();
 		for (Url themeUrl : urlThemeSet) {
 			// 创建线程任务
@@ -120,20 +122,29 @@ public class GrabBaiduTieBaImpl {
 
 		int numBa = 0;
 		for (Future<Set<Url>> future : setThread) {
+
 			Set<Url> listUrlPost_Ba = future.get();
 
-			// File filePostUrl_Ba = new File("./file/url/baidutieba/" +
-			// (++numBa)
-			// + ".txt");
-			// if (!filePostUrl_Ba.exists()) {
-			// filePostUrl_Ba.createNewFile();
-			// }
-			// FileWriter fw = new FileWriter(filePostUrl_Ba);
-			//
-			// for (Url urlSinglePost : listUrlPost_Ba) {
-			// fw.write(urlSinglePost.getUrl() + "\r\n");
-			// }
-			// fw.close();
+			// 创建文本文档存储每个吧的所有帖子地址
+			File filePostUrl_Ba = new File("./file/url/baidutieba/" + (++numBa)
+					+ ".txt");
+			if (!filePostUrl_Ba.exists()) {
+				filePostUrl_Ba.createNewFile();
+			}
+			FileWriter fw = new FileWriter(filePostUrl_Ba);
+
+			// 防止空吧的情况（该吧被禁）
+			if (listUrlPost_Ba == null) {
+				fw.write("forbidden");
+				fw.close();
+				
+				continue;
+			}
+
+			for (Url urlSinglePost : listUrlPost_Ba) {
+				fw.write(urlSinglePost.getUrl() + "\r\n");
+			}
+			fw.close();
 		}
 
 		// 关闭线程

@@ -1,5 +1,7 @@
 package com.ecis.grab.test;
 
+import java.util.Scanner;
+
 import org.junit.Test;
 
 import com.ecis.grab.impl.GrabBaiduTieBaImpl;
@@ -17,7 +19,8 @@ public class GrabBaiduTieBaUrlThreadTest_Main {
 	public void testAnayPagination() throws Exception {
 		GetBaiduTieBaUrlThread testObj = new GetBaiduTieBaUrlThread(null);
 	
-		String urlTest = "http://tieba.baidu.com/f?kw=%B9%AB%CE%F1%D4%B1";
+		
+		String urlTest = new Scanner(System.in).next();
 		testObj.anayPagination(urlTest);
 	}
 
@@ -25,7 +28,7 @@ public class GrabBaiduTieBaUrlThreadTest_Main {
 	public void testGetPostUrl() throws Exception {
 		GetBaiduTieBaUrlThread testObj = new GetBaiduTieBaUrlThread(null);
 		
-		String urlTest = "http://tieba.baidu.com/f?kw=%C9%CF%BA%A3%BE%C5%D4%BA";
+		String urlTest = new Scanner(System.in).next();
 		testObj.getPostUrl(urlTest);
 	}
 }

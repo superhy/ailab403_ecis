@@ -1,4 +1,4 @@
-package org.superhy.fetch;
+package com.ecis.fetch;
 
 public class FetchPager {
 	

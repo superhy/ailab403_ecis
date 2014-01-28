@@ -3,7 +3,8 @@ package com.ecis.fetch.test;
 import java.util.Scanner;
 
 import org.junit.Test;
-import org.superhy.fetch.impl.FetchBaiduTieBaImpl;
+
+import com.ecis.fetch.impl.FetchBaiduTieBaImpl;
 
 public class FetchBaiduTieBaImplTest {
 

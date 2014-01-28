@@ -45,13 +45,8 @@ public class FetchBaiduTieBaImpl {
 
 	// 初始化帖子页面文档变量
 	public static void setDocPostFirstPage() {
-		try {
-			FetchBaiduTieBaImpl.docPostFirstPage = GetJsoupDocument
-					.getDocument(postLink);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		FetchBaiduTieBaImpl.docPostFirstPage = GetJsoupDocument
+				.getDocument(postLink);
 	}
 
 	// 初试话解析参数配置信息，参入参数暂定为配置文档
@@ -82,7 +77,7 @@ public class FetchBaiduTieBaImpl {
 		return strTitle;
 	}
 
-	
+	//
 	public List<String> getPagerUrl(String fetchPagerMethod) {
 		List<String> listPagerUrl = new ArrayList<String>();
 

@@ -11,22 +11,31 @@ import com.ecis.util.GetJsoupDocument;
 
 public class FetchPager {
 
-	public List<String> getBaidutiebaPagerUrl(String urlPost) {
+	public List<String> getBaidutiebaPagerUrl(String urlPost, String pagerQuery) {
 		// 容器存放分页链接
 		List<String> listPagerUrl = new ArrayList<String>();
 
 		Document docPager = GetJsoupDocument.getDocument(urlPost);
 
-		//根据总的链接数得出每个分页的链接，
-		String pagerQuery = "li.l_pager.pager_theme_2";
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
 		Element elePagerDiv = docPager.select(pagerQuery).first();
-		String strPagerLast = elePagerDiv.select("a[href]").last().attr("abs:href");
-		int numPager =Integer.parseInt(strPagerLast.substring(strPagerLast.length() - 1));
-		for (int i = 1; i <= numPager; i++) {
-			String strPagerEach = strPagerLast.substring(0, strPagerLast.length() - 1) + Integer.toString(i);
+		// 假如只有一页，没有分页信息的情况
+		if (elePagerDiv.select("a[href]").size() == 0) {
+
+			return listPagerUrl;
+		}
+		String strPagerLast = elePagerDiv.select("a[href]").last()
+				.attr("abs:href");
+		int numPager = Integer.parseInt(strPagerLast.substring(strPagerLast
+				.indexOf('=') + 1));
+		for (int i = 2; i <= numPager; i++) {
+			String strPagerEach = strPagerLast.substring(0,
+					strPagerLast.indexOf('=') + 1)
+					+ Integer.toString(i);
 			listPagerUrl.add(strPagerEach);
-			
-			System.out.println(strPagerEach);
+
+			/* System.out.println(strPagerEach); */
 		}
 
 		return listPagerUrl;

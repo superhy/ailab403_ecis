@@ -7,14 +7,15 @@ import org.junit.Test;
 import com.ecis.fetch.FetchPager;
 
 public class FetchPagerTest {
-	
+
 	@Test
 	public void testGetBaidutiebaPagerUrl() {
 		FetchPager testObj = new FetchPager();
-		
+
 		Scanner cin = new Scanner(System.in);
 		String testUrlPost = cin.next();
-		
-		testObj.getBaidutiebaPagerUrl(testUrlPost);
+		String testPagerQuery = "li.l_pager.pager_theme_2";
+
+		testObj.getBaidutiebaPagerUrl(testUrlPost, testPagerQuery);
 	}
 }

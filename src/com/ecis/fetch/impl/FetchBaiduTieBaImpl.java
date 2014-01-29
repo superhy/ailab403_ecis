@@ -1,6 +1,7 @@
 package com.ecis.fetch.impl;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,10 +78,29 @@ public class FetchBaiduTieBaImpl {
 		return strTitle;
 	}
 
-	//
-	public List<String> getPagerUrl(String fetchPagerMethod) {
+	// 获取帖子各分页链接（集合），反射机制
+	public List<String> getPagerUrl(String fetchPagerMethod, String pagerQuery) {
 		List<String> listPagerUrl = new ArrayList<String>();
+		Class<?> classFetchPager = null;
 
-		return null;
+		// 反射机制获取类名
+		try {
+			classFetchPager = Class.forName("com.ecis.fetch.FetchPager");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 反射机制调用制定名称的方法（传入参数并获取返回值）
+		try {
+			Method methodGetBaidutiebaPagerUrl = classFetchPager.getMethod(
+					"getBaidutiebaPagerUrl", String.class, String.class);
+			listPagerUrl = (List<String>) methodGetBaidutiebaPagerUrl.invoke(
+					classFetchPager.newInstance(), getPostLink(), pagerQuery);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return listPagerUrl;
 	}
 }

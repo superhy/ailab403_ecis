@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
 import com.ecis.model.ContentParame;
 import com.ecis.util.GetJsoupDocument;
 
@@ -105,15 +106,15 @@ public class FetchBaiduTieBaImpl {
 	}
 
 	// 获取每个分页的帖子内容
-	public void getContentEachPager(String pageUrl, String postContentQuery,
-			String postAuthorQuery, String postTimeQuery,
-			String replyContentQuery, String replyAuthorQuery,
-			String replyTimeQuery) {
+	public void getContentEachPager(String pageUrl, String postDivQuery,
+			String postContentQuery, String postAuthorQuery,
+			String postTimeQuery, String replyContentQuery,
+			String replyAuthorQuery, String replyTimeQuery) {
 
 		// 获取单独每页的文档信息
 		Document docEachPage = GetJsoupDocument.getDocument(pageUrl);
 		// 获取每个帖子div的元素集合
-		Elements elesPostDiv = docEachPage.select("div[class*=l_post]");
+		Elements elesPostDiv = docEachPage.select(postDivQuery);
 		String strContentEachPage = "";
 
 		for (Element elePostDiv : elesPostDiv) {
@@ -129,7 +130,21 @@ public class FetchBaiduTieBaImpl {
 
 			// 获取发帖时间及楼层信息
 			Element elePostTimeDiv = elePostDiv.select(postTimeQuery).first();
-			
+			String strPostTime = elePostTimeDiv.text();
+			// 百度的发帖时间在javascript中显示，需要单独编写解析json的方法
+			if (pageUrl.indexOf("baidu") != -1) {
+				strPostTime += (new FetchBaiduTieBaPostTime()
+						.getBaiduTieBaPostTime(elePostDiv));
+			}
+
+			// 获取回复模块
+
+			// 将分析出来的各部分内容组合
+			strContentEachPage += ("author: " + strPostAuthor + "\r\ncontent:"
+					+ strPostContent + "\r\ntime: " + strPostTime + "\r\n");
 		}
+
+		System.out.println(strContentEachPage);
+
 	}
 }

@@ -1,4 +1,4 @@
-package com.ecis.fetch;
+package com.ecis.fetch.special;
 
 import java.util.ArrayList;
 import java.util.List;

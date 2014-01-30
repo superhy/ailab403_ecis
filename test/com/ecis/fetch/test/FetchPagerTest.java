@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.fetch.FetchPager;
+import com.ecis.fetch.special.FetchPager;
 
 public class FetchPagerTest {
 

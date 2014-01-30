@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.junit.Test;
 
 import com.ecis.fetch.impl.FetchBaiduTieBaImpl;
+import com.ecis.model.ContentParame;
 
 public class FetchBaiduTieBaImplTest {
 
@@ -53,5 +54,27 @@ public class FetchBaiduTieBaImplTest {
 		for (String strResult : testObj.getPagerUrl(strMethod, testPagerQuery)) {
 			System.out.println(strResult);
 		}
+	}
+
+	@Test
+	public void testGetContentEachPager() {
+
+		Scanner cin = new Scanner(System.in);
+		String strPageUrl = cin.next();
+
+		FetchBaiduTieBaImpl testObj = new FetchBaiduTieBaImpl();
+		// testObj.setPostLink(strPostLink);
+		// testObj.initContentParame(null);
+
+		String postDivQuery = "div[class*=l_post]";
+		String postContentQuery = "div.p_content";
+		String postAuthorQuery = "a[class*=p_author_name]";
+		String postTimeQuery = "ul.p_tail";
+		String replyContentQuery = "";
+		String replyAuthorQuery = "";
+		String replyTimeQuery = "";
+		testObj.getContentEachPager(strPageUrl, postDivQuery, postContentQuery,
+				postAuthorQuery, postTimeQuery, replyContentQuery,
+				replyAuthorQuery, replyTimeQuery);
 	}
 }

@@ -103,4 +103,33 @@ public class FetchBaiduTieBaImpl {
 
 		return listPagerUrl;
 	}
+
+	// 获取每个分页的帖子内容
+	public void getContentEachPager(String pageUrl, String postContentQuery,
+			String postAuthorQuery, String postTimeQuery,
+			String replyContentQuery, String replyAuthorQuery,
+			String replyTimeQuery) {
+
+		// 获取单独每页的文档信息
+		Document docEachPage = GetJsoupDocument.getDocument(pageUrl);
+		// 获取每个帖子div的元素集合
+		Elements elesPostDiv = docEachPage.select("div[class*=l_post]");
+		String strContentEachPage = "";
+
+		for (Element elePostDiv : elesPostDiv) {
+			// 获取作者信息
+			Element elePostAuthorDiv = elePostDiv.select(postAuthorQuery)
+					.first();
+			String strPostAuthor = elePostAuthorDiv.text();
+
+			// 获取帖子内容信息
+			Element elePostContentDiv = elePostDiv.select(postContentQuery)
+					.first();
+			String strPostContent = elePostContentDiv.text();
+
+			// 获取发帖时间及楼层信息
+			Element elePostTimeDiv = elePostDiv.select(postTimeQuery).first();
+			
+		}
+	}
 }

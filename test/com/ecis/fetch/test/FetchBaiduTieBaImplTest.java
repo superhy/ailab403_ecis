@@ -2,10 +2,13 @@ package com.ecis.fetch.test;
 
 import java.util.Scanner;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.Test;
 
-import com.ecis.fetch.impl.FetchBaiduTieBaImpl;
+import com.ecis.fetch.impl.FetchContentImpl_BaiduTieBa;
 import com.ecis.model.ContentParame;
+import com.ecis.util.GetJsoupDocument;
 
 public class FetchBaiduTieBaImplTest {
 
@@ -17,7 +20,7 @@ public class FetchBaiduTieBaImplTest {
 		String strPostLink = cin.next();
 
 		// 建立测试对象，初始化帖子模版参数
-		FetchBaiduTieBaImpl testObj = new FetchBaiduTieBaImpl();
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -31,7 +34,7 @@ public class FetchBaiduTieBaImplTest {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		FetchBaiduTieBaImpl testObj = new FetchBaiduTieBaImpl();
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -46,7 +49,7 @@ public class FetchBaiduTieBaImplTest {
 		String strMethod = "getBaidutiebaPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchBaiduTieBaImpl testObj = new FetchBaiduTieBaImpl();
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -57,12 +60,31 @@ public class FetchBaiduTieBaImplTest {
 	}
 
 	@Test
+	public void testGetReplyEachPost() {
+
+		Scanner cin = new Scanner(System.in);
+		String strPageUrl = cin.next();
+
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+
+		Document docTestPage = GetJsoupDocument.getDocument(strPageUrl);
+		Element eleTestPost = docTestPage.select("div[class*=l_post]").get(1);
+
+		String replyDivQuery = "li[class*=lzl_single_post]";
+		String replyContentQuery = "span.lzl_content_main";
+		String replyAuthorQuery = "a.at.j_user_card";
+		String replyTimeQuery = "span.lzl_time";
+		testObj.getReplyEachPost(eleTestPost, replyDivQuery, replyContentQuery,
+				replyAuthorQuery, replyTimeQuery);
+	}
+
+	@Test
 	public void testGetContentEachPager() {
 
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchBaiduTieBaImpl testObj = new FetchBaiduTieBaImpl();
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
 		// testObj.setPostLink(strPostLink);
 		// testObj.initContentParame(null);
 
@@ -70,11 +92,12 @@ public class FetchBaiduTieBaImplTest {
 		String postContentQuery = "div.p_content";
 		String postAuthorQuery = "a[class*=p_author_name]";
 		String postTimeQuery = "ul.p_tail";
+		String replyDivQuery = "";
 		String replyContentQuery = "";
 		String replyAuthorQuery = "";
 		String replyTimeQuery = "";
 		testObj.getContentEachPager(strPageUrl, postDivQuery, postContentQuery,
-				postAuthorQuery, postTimeQuery, replyContentQuery,
-				replyAuthorQuery, replyTimeQuery);
+				postAuthorQuery, postTimeQuery, replyDivQuery,
+				replyContentQuery, replyAuthorQuery, replyTimeQuery);
 	}
 }

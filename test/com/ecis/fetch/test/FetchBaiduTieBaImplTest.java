@@ -92,10 +92,10 @@ public class FetchBaiduTieBaImplTest {
 		String postContentQuery = "div.p_content";
 		String postAuthorQuery = "a[class*=p_author_name]";
 		String postTimeQuery = "ul.p_tail";
-		String replyDivQuery = "";
-		String replyContentQuery = "";
-		String replyAuthorQuery = "";
-		String replyTimeQuery = "";
+		String replyDivQuery = "li[class*=lzl_single_post]";
+		String replyContentQuery = "span.lzl_content_main";
+		String replyAuthorQuery = "a.at.j_user_card";
+		String replyTimeQuery = "span.lzl_time";
 		testObj.getContentEachPager(strPageUrl, postDivQuery, postContentQuery,
 				postAuthorQuery, postTimeQuery, replyDivQuery,
 				replyContentQuery, replyAuthorQuery, replyTimeQuery);

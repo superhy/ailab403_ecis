@@ -202,8 +202,8 @@ public class FetchContentImpl_BaiduTieBa {
 					+ strReplyTime + "\r\n");
 		}
 
-		System.out.println(strReplyContentEachPost);
-		
+		// System.out.println(strReplyContentEachPost);
+
 		return strReplyContentEachPost;
 	}
 
@@ -255,10 +255,15 @@ public class FetchContentImpl_BaiduTieBa {
 			}
 
 			// 获取回复模块（通过调用单独的方法实现）
+			String strReplyContentEachPost = getReplyEachPost(elePostDiv,
+					replyDivQuery, replyContentQuery, replyAuthorQuery,
+					replyTimeQuery);
 
 			// 将分析出来的各部分内容组合
 			strContentEachPage += ("author: " + strPostAuthor + "\r\ncontent:"
 					+ strPostContent + "\r\ntime: " + strPostTime + "\r\n");
+			strContentEachPage += ("------\r\nreply:\r\n"
+					+ strReplyContentEachPost + "\r\n");
 		}
 
 		System.out.println(strContentEachPage);

@@ -312,4 +312,6 @@ public class FetchContentImpl_BaiduTieBa {
 
 		return strContentAllPost;
 	}
+	
+	
 }

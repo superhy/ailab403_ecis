@@ -53,8 +53,8 @@ public class FetchBaiduTieBaImplTest {
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
-		String testPagerQuery = "li.l_pager.pager_theme_2";
-		for (String strResult : testObj.getPagerUrl(strMethod, testPagerQuery)) {
+		String pagerQuery = "li.l_pager.pager_theme_2";
+		for (String strResult : testObj.getPagerUrl(strMethod, pagerQuery)) {
 			System.out.println(strResult);
 		}
 	}
@@ -99,5 +99,31 @@ public class FetchBaiduTieBaImplTest {
 		testObj.getContentEachPager(strPageUrl, postDivQuery, postContentQuery,
 				postAuthorQuery, postTimeQuery, replyDivQuery,
 				replyContentQuery, replyAuthorQuery, replyTimeQuery);
+	}
+
+	@Test
+	public void testGetContentAllPager() {
+
+		Scanner cin = new Scanner(System.in);
+		String strMethod = "getBaidutiebaPagerUrl";
+		String strPostLink = cin.next();
+
+		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		testObj.setPostLink(strPostLink);
+		testObj.initContentParame(null);
+
+		String pagerQuery = "li.l_pager.pager_theme_2";
+		String postDivQuery = "div[class*=l_post]";
+		String postContentQuery = "div.p_content";
+		String postAuthorQuery = "a[class*=p_author_name]";
+		String postTimeQuery = "ul.p_tail";
+		String replyDivQuery = "li[class*=lzl_single_post]";
+		String replyContentQuery = "span.lzl_content_main";
+		String replyAuthorQuery = "a.at.j_user_card";
+		String replyTimeQuery = "span.lzl_time";
+		testObj.getContentAllPager(strMethod, pagerQuery, postDivQuery,
+				postContentQuery, postAuthorQuery, postTimeQuery,
+				replyDivQuery, replyContentQuery, replyAuthorQuery,
+				replyTimeQuery);
 	}
 }

@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
+import com.ecis.fetch.special.FetchPager;
 import com.ecis.model.ContentParame;
 import com.ecis.util.GetJsoupDocument;
 
@@ -128,7 +129,8 @@ public class FetchContentImpl_BaiduTieBa {
 
 		// 反射机制获取类名
 		try {
-			classFetchPager = Class.forName("com.ecis.fetch.FetchPager");
+			classFetchPager = Class.forName(new FetchPager().getClass()
+					.getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,7 +139,7 @@ public class FetchContentImpl_BaiduTieBa {
 		// 反射机制调用制定名称的方法（传入参数并获取返回值）
 		try {
 			Method methodGetBaidutiebaPagerUrl = classFetchPager.getMethod(
-					"getBaidutiebaPagerUrl", String.class, String.class);
+					fetchPagerMethod, String.class, String.class);
 			listPagerUrl = (List<String>) methodGetBaidutiebaPagerUrl.invoke(
 					classFetchPager.newInstance(), getPostLink(), pagerQuery);
 		} catch (Exception e) {
@@ -208,7 +210,7 @@ public class FetchContentImpl_BaiduTieBa {
 	}
 
 	/**
-	 * 获取每个分页的帖子内容（*）
+	 * 获取每个分页的帖子内容
 	 * 
 	 * @param pageUrl
 	 * @param postDivQuery
@@ -269,5 +271,45 @@ public class FetchContentImpl_BaiduTieBa {
 		System.out.println(strContentEachPage);
 
 		return strContentEachPage;
+	}
+
+	/**
+	 * 获取所有分页的帖子内容（*）
+	 * 
+	 * @param fetchPagerMethod
+	 * @param pagerQuery
+	 * @param postDivQuery
+	 * @param postContentQuery
+	 * @param postAuthorQuery
+	 * @param postTimeQuery
+	 * @param replyDivQuery
+	 * @param replyContentQuery
+	 * @param replyAuthorQuery
+	 * @param replyTimeQuery
+	 * @return
+	 */
+	public String getContentAllPager(String fetchPagerMethod,
+			String pagerQuery, String postDivQuery, String postContentQuery,
+			String postAuthorQuery, String postTimeQuery, String replyDivQuery,
+			String replyContentQuery, String replyAuthorQuery,
+			String replyTimeQuery) {
+
+		// 获取某一帖子所有页面的链接列表
+		List<String> listPostPage = getPagerUrl(fetchPagerMethod, pagerQuery);
+		String strContentAllPost = "";
+
+		// 按照链接列表逐一分析页面
+		for (String strEachPostPage : listPostPage) {
+			String strContentEachPage = getContentEachPager(strEachPostPage,
+					postDivQuery, postContentQuery, postAuthorQuery,
+					postTimeQuery, replyDivQuery, replyContentQuery,
+					replyAuthorQuery, replyTimeQuery);
+
+			strContentAllPost += strContentEachPage;
+		}
+
+		System.out.println(strContentAllPost);
+
+		return strContentAllPost;
 	}
 }

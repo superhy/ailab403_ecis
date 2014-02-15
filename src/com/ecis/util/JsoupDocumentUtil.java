@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class GetJsoupDocument {
+public class JsoupDocumentUtil {
 
 	public static Document getDocument(String url) {
 		try {

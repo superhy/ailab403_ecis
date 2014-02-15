@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
 
 import com.ecis.grab.thread.GetBaiduTieBaUrlThread;
 import com.ecis.model.Url;
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 import com.ecis.util.ParseProperties;
 import com.ecis.util.TransMD5;
 
@@ -37,7 +37,7 @@ public class GrabBaiduTieBaImpl {
 	public Set<Url> getThemeUrl() throws Exception {
 		setSeedUrl(new ParseProperties().getSeedUrl("baidutieba"));
 
-		Document docSeed = GetJsoupDocument.getDocument(seedUrl);
+		Document docSeed = JsoupDocumentUtil.getDocument(seedUrl);
 
 		// 获得右盒子的元素（详细列表），获取含有每个主题对应链接的元素
 		// Element eleRightSec = seedDoc.getElementById("right-sec");
@@ -71,7 +71,7 @@ public class GrabBaiduTieBaImpl {
 		Set<Url> urlThemeSet = new HashSet<Url>();
 
 		for (String urlPage : listUrlPage) {
-			Document docPage = GetJsoupDocument.getDocument(urlPage);
+			Document docPage = JsoupDocumentUtil.getDocument(urlPage);
 
 			// 取出第一页叶子主题（吧）的链接元素
 			Elements elesBa_page = docPage.select("a[class*=ba_href]");

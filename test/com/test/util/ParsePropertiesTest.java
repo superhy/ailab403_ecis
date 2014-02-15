@@ -1,4 +1,4 @@
-package com.ecis.util.test;
+package com.test.util;
 
 import java.util.Scanner;
 

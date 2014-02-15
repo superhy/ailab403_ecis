@@ -1,4 +1,4 @@
-package com.ecis.fetch.test;
+package com.test.fetch.special;
 
 import java.util.Scanner;
 

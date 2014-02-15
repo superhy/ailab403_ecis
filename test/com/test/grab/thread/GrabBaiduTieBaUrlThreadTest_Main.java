@@ -1,4 +1,4 @@
-package com.ecis.grab.test;
+package com.test.grab.thread;
 
 import java.util.Scanner;
 

@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
 import com.ecis.fetch.special.FetchPager;
 import com.ecis.model.ContentParame;
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 
 public class FetchContentImpl_BaiduTieBa {
 
@@ -48,12 +48,12 @@ public class FetchContentImpl_BaiduTieBa {
 
 	// 初始化帖子页面文档变量
 	public static void setDocPostFirstPage() {
-		FetchContentImpl_BaiduTieBa.docPostFirstPage = GetJsoupDocument
+		FetchContentImpl_BaiduTieBa.docPostFirstPage = JsoupDocumentUtil
 				.getDocument(postLink);
 	}
 
 	/**
-	 * 初试话解析参数配置信息，参入参数暂定为配置文档
+	 * 初试话解析参数配置信息，参入参数暂定为配置文档（待完成）
 	 * 
 	 * @param postParameXMLFilePath
 	 */
@@ -140,6 +140,7 @@ public class FetchContentImpl_BaiduTieBa {
 		try {
 			Method methodGetBaidutiebaPagerUrl = classFetchPager.getMethod(
 					fetchPagerMethod, String.class, String.class);
+
 			listPagerUrl = (List<String>) methodGetBaidutiebaPagerUrl.invoke(
 					classFetchPager.newInstance(), getPostLink(), pagerQuery);
 		} catch (Exception e) {
@@ -230,7 +231,7 @@ public class FetchContentImpl_BaiduTieBa {
 			String replyTimeQuery) {
 
 		// 获取单独每页的文档信息
-		Document docEachPage = GetJsoupDocument.getDocument(pageUrl);
+		Document docEachPage = JsoupDocumentUtil.getDocument(pageUrl);
 		// 获取每个帖子div的元素集合
 		Elements elesPostDiv = docEachPage.select(postDivQuery);
 		String strContentEachPage = "";
@@ -312,6 +313,9 @@ public class FetchContentImpl_BaiduTieBa {
 
 		return strContentAllPost;
 	}
-	
-	
+
+	// 获取话题全部内容（待完成）
+	public void getAllContent() {
+
+	}
 }

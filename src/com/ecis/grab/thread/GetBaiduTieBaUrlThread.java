@@ -16,7 +16,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecis.model.Url;
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 import com.ecis.util.TransMD5;
 
 public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
@@ -41,7 +41,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 		// urlPageList_Level.add(urlEachPage);
 		// }
 
-		Document docRoot = GetJsoupDocument.getDocument(urlBa);
+		Document docRoot = JsoupDocumentUtil.getDocument(urlBa);
 
 		// 用于存储该吧所有帖子链接的哈希表
 		Set<String> listUrlPage = new HashSet<String>();
@@ -75,7 +75,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 			numPageNow++;
 
 			// 将分页区域元素更新为下一页所指向页面的分页区域元素
-			elePager = GetJsoupDocument.getDocument(urlNext).getElementById(
+			elePager = JsoupDocumentUtil.getDocument(urlNext).getElementById(
 					"frs_list_pager");
 		}
 
@@ -88,7 +88,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 
 	// 根据每一页的分页url获取该页所有帖子url
 	public Set<Url> getPostUrl(String urlSinglePage) throws Exception {
-		Document docSinglePage = GetJsoupDocument.getDocument(urlSinglePage);
+		Document docSinglePage = JsoupDocumentUtil.getDocument(urlSinglePage);
 
 		Set<Url> listUrlPost = new HashSet<Url>();
 		Elements elesPost = docSinglePage
@@ -143,7 +143,7 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 		String urlBa = url.getUrl();
 
 		// 创建帖子url库文件
-		Document docTitle_Ba = GetJsoupDocument.getDocument(urlBa);
+		Document docTitle_Ba = JsoupDocumentUtil.getDocument(urlBa);
 
 		// 获取贴吧计划抓取的所有分页url
 		Set<String> listUrlPage = anayPagination(urlBa);

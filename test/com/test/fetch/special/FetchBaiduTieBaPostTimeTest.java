@@ -1,4 +1,4 @@
-package com.ecis.fetch.test;
+package com.test.fetch.special;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.junit.Test;
 
 import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 
 public class FetchBaiduTieBaPostTimeTest {
 
@@ -18,7 +18,7 @@ public class FetchBaiduTieBaPostTimeTest {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		Document docBaiduTieBaPost = GetJsoupDocument.getDocument(strPostLink);
+		Document docBaiduTieBaPost = JsoupDocumentUtil.getDocument(strPostLink);
 		Element eleBaiduTieBaPostDiv = docBaiduTieBaPost.select(
 				"div[class*=l_post]").first();
 		

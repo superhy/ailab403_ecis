@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 
 public class FetchPager {
 
@@ -15,11 +15,12 @@ public class FetchPager {
 		// 容器存放分页链接
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = GetJsoupDocument.getDocument(urlPost);
+		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
 		Element elePagerDiv = docPager.select(pagerQuery).first();
+		
 		// 假如只有一页，没有分页信息的情况
 		if (elePagerDiv.select("a[href]").size() == 0) {
 

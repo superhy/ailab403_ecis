@@ -1,4 +1,4 @@
-package com.ecis.fetch.test;
+package com.test.fetch.impl;
 
 import java.util.Scanner;
 
@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import com.ecis.fetch.impl.FetchContentImpl_BaiduTieBa;
 import com.ecis.model.ContentParame;
-import com.ecis.util.GetJsoupDocument;
+import com.ecis.util.JsoupDocumentUtil;
 
-public class FetchBaiduTieBaImplTest {
+public class FetchContentImpl_BaiduTieBaTest {
 
 	@Test
 	public void testGetBaName() {
@@ -67,7 +67,7 @@ public class FetchBaiduTieBaImplTest {
 
 		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
 
-		Document docTestPage = GetJsoupDocument.getDocument(strPageUrl);
+		Document docTestPage = JsoupDocumentUtil.getDocument(strPageUrl);
 		Element eleTestPost = docTestPage.select("div[class*=l_post]").get(1);
 
 		String replyDivQuery = "li[class*=lzl_single_post]";
@@ -112,7 +112,7 @@ public class FetchBaiduTieBaImplTest {
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
-		String pagerQuery = "li.l_pager.pager_theme_2";
+		String pagerQuery = "li[class*=l_pager]";
 		String postDivQuery = "div[class*=l_post]";
 		String postContentQuery = "div.p_content";
 		String postAuthorQuery = "a[class*=p_author_name]";
@@ -126,4 +126,6 @@ public class FetchBaiduTieBaImplTest {
 				replyDivQuery, replyContentQuery, replyAuthorQuery,
 				replyTimeQuery);
 	}
+	
+	
 }

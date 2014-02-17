@@ -6,11 +6,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 
-import com.ecis.fetch.impl.FetchContentImpl_BaiduTieBa;
+import com.ecis.fetch.impl.FetchContentImpl;
 import com.ecis.model.ContentParame;
 import com.ecis.util.JsoupDocumentUtil;
 
-public class FetchContentImpl_BaiduTieBaTest {
+public class FetchContentImplTest_BaiduTieBa {
 
 	@Test
 	public void testGetBaName() {
@@ -20,7 +20,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		String strPostLink = cin.next();
 
 		// 建立测试对象，初始化帖子模版参数
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -34,7 +34,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -49,7 +49,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		String strMethod = "getBaidutiebaPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -65,7 +65,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 
 		Document docTestPage = JsoupDocumentUtil.getDocument(strPageUrl);
 		Element eleTestPost = docTestPage.select("div[class*=l_post]").get(1);
@@ -84,7 +84,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 		// testObj.setPostLink(strPostLink);
 		// testObj.initContentParame(null);
 
@@ -108,7 +108,7 @@ public class FetchContentImpl_BaiduTieBaTest {
 		String strMethod = "getBaidutiebaPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImpl_BaiduTieBa testObj = new FetchContentImpl_BaiduTieBa();
+		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.initContentParame(null);
 
@@ -127,5 +127,16 @@ public class FetchContentImpl_BaiduTieBaTest {
 				replyTimeQuery);
 	}
 	
-	
+	@Test
+	public void testGetAllContent() {
+		FetchContentImpl testObj = new FetchContentImpl();
+		
+		String postParameXMLFilePath = "./src/contentParameResource/baidutiebaParame.xml";
+		String strPostLink = new Scanner(System.in).next();
+		
+		testObj.setPostLink(strPostLink);
+		String strResult = testObj.getAllContent(postParameXMLFilePath);
+		
+		System.out.println(strResult);
+	}
 }

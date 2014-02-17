@@ -10,12 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.ecis.fetch.special.AnalyzerContentParameResource;
 import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
 import com.ecis.fetch.special.FetchPager;
 import com.ecis.model.ContentParame;
 import com.ecis.util.JsoupDocumentUtil;
 
-public class FetchContentImpl_BaiduTieBa {
+public class FetchContentImpl {
 
 	// 页面链接
 	private static String postLink;
@@ -48,18 +49,22 @@ public class FetchContentImpl_BaiduTieBa {
 
 	// 初始化帖子页面文档变量
 	public static void setDocPostFirstPage() {
-		FetchContentImpl_BaiduTieBa.docPostFirstPage = JsoupDocumentUtil
+		FetchContentImpl.docPostFirstPage = JsoupDocumentUtil
 				.getDocument(postLink);
 	}
 
 	/**
-	 * 初试话解析参数配置信息，参入参数暂定为配置文档（待完成）
+	 * 初试话解析参数配置信息，参入参数暂定为配置文档路径
 	 * 
 	 * @param postParameXMLFilePath
 	 */
 	public void initContentParame(String postParameXMLFilePath) {
-
 		setDocPostFirstPage();
+
+		AnalyzerContentParameResource analyzerObj = new AnalyzerContentParameResource();
+		analyzerObj.setXmlResourcePath(postParameXMLFilePath);
+
+		setCntParame(analyzerObj.getAllContentParameValue());
 	}
 
 	/*
@@ -86,7 +91,7 @@ public class FetchContentImpl_BaiduTieBa {
 		Element eleBaName = docBaName.select(baNameQuery).first();
 		strBaName = eleBaName.text() + "\r\n";
 
-		System.out.println(strBaName);
+		// System.out.println(strBaName);
 
 		return strBaName;
 	}
@@ -111,7 +116,7 @@ public class FetchContentImpl_BaiduTieBa {
 		Element eleTitle = docTitle.select(titleQuery).first();
 		strTitle = eleTitle.text() + "\r\n";
 
-		System.out.println(strTitle);
+		// System.out.println(strTitle);
 
 		return strTitle;
 	}
@@ -269,7 +274,7 @@ public class FetchContentImpl_BaiduTieBa {
 					+ strReplyContentEachPost + "\r\n");
 		}
 
-		System.out.println(strContentEachPage);
+		// System.out.println(strContentEachPage);
 
 		return strContentEachPage;
 	}
@@ -309,13 +314,26 @@ public class FetchContentImpl_BaiduTieBa {
 			strContentAllPost += strContentEachPage;
 		}
 
-		System.out.println(strContentAllPost);
+		// System.out.println(strContentAllPost);
 
 		return strContentAllPost;
 	}
 
 	// 获取话题全部内容（待完成）
-	public void getAllContent() {
+	public String getAllContent(String postParameXMLFilePath) {
+		initContentParame(postParameXMLFilePath);
 
+		String strAllContent = "";
+
+		strAllContent += (getBaName(cntParame.getBaNameQuery()) + "\r\n");
+		strAllContent += (getTitle(cntParame.getTitleQuery()) + "\r\n");
+		strAllContent += (getContentAllPager(cntParame.getFetchPagerMethod(),
+				cntParame.getPagerQuery(), cntParame.getPostDivQuery(),
+				cntParame.getPostContentQuery(),
+				cntParame.getPostAuthorQuery(), cntParame.getPostTimeQuery(),
+				cntParame.getReplyDivQuery(), cntParame.getReplyContentQuery(),
+				cntParame.getReplyAuthorQuery(), cntParame.getReplyTimeQuery()));
+
+		return strAllContent;
 	}
 }

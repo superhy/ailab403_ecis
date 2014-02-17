@@ -5,7 +5,7 @@
 	</postweb-info> -->
 
 	<element id="baNameQuery">
-		<value>a#tab_forumname</value>
+		<value>a#tab_home</value>
 	</element>
 	<element id="titleQuery">
 		<value>h1.core_title_txt</value>

@@ -11,7 +11,7 @@
 		<value>h1.core_title_txt</value>
 	</element>
 	<element id="pagerQuery">
-		<value>li.l_pager.pager_theme_2</value>
+		<value>li[class*=l_pager]</value>
 	</element>
 	<element id="fetchPagerMethod">
 		<value>getBaidutiebaPagerUrl</value>

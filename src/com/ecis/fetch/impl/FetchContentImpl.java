@@ -11,7 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecis.fetch.special.AnalyzerContentParameResource;
-import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
+import com.ecis.fetch.special.FetchPostTime_BaiduTieBa;
 import com.ecis.fetch.special.FetchPager;
 import com.ecis.model.ContentParame;
 import com.ecis.util.JsoupDocumentUtil;
@@ -258,7 +258,7 @@ public class FetchContentImpl {
 			String strPostTime = elePostTimeDiv.text();
 			// 百度的发帖时间在javascript中显示，需要单独编写解析json的方法
 			if (pageUrl.indexOf("baidu") != -1) {
-				strPostTime += (new FetchBaiduTieBaPostTime()
+				strPostTime += (new FetchPostTime_BaiduTieBa()
 						.getBaiduTieBaPostTime(elePostDiv));
 			}
 

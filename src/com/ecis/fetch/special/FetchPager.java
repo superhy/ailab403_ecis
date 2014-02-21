@@ -20,7 +20,7 @@ public class FetchPager {
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
 		Element elePagerDiv = docPager.select(pagerQuery).first();
-		
+
 		// 假如只有一页，没有分页信息的情况
 		if (elePagerDiv.select("a[href]").size() == 0) {
 
@@ -37,6 +37,33 @@ public class FetchPager {
 			listPagerUrl.add(strPagerEach);
 
 			/* System.out.println(strPagerEach); */
+		}
+
+		return listPagerUrl;
+	}
+
+	public List<String> getFenghuangluntanPagerUrl(String urlPost,
+			String pagerQuery) {
+
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		String strLastPage = elePagerDiv.select("a[href*=viewthread]").last()
+				.attr("abs:href");
+
+		// System.out.println(strLastPage);
+
+		String strPageModel = strLastPage.substring(0,
+				strLastPage.indexOf("page=") + 5);
+		int numPages = Integer.valueOf(strLastPage.substring(
+				strLastPage.indexOf("page=") + 5, strLastPage.length()));
+
+		for (int i = 1; i <= numPages; i++) {
+			String strEachPage = strPageModel + i;
+			
+			listPagerUrl.add(strEachPage);
 		}
 
 		return listPagerUrl;

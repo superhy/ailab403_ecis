@@ -6,14 +6,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 
-import com.ecis.fetch.special.FetchBaiduTieBaPostTime;
+import com.ecis.fetch.special.FetchPostTime_BaiduTieBa;
 import com.ecis.util.JsoupDocumentUtil;
 
 public class FetchBaiduTieBaPostTimeTest {
 
 	@Test
 	public void testGetBaiduTieBaPostTime() {
-		FetchBaiduTieBaPostTime testObj = new FetchBaiduTieBaPostTime();
+		FetchPostTime_BaiduTieBa testObj = new FetchPostTime_BaiduTieBa();
 
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();

@@ -1,5 +1,6 @@
 package com.test.fetch.special;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -14,8 +15,24 @@ public class FetchPagerTest {
 
 		Scanner cin = new Scanner(System.in);
 		String testUrlPost = cin.next();
-		String testPagerQuery = "li.l_pager.pager_theme_2";
+		String testPagerQuery = "li[class*=l_pager]";
 
 		testObj.getBaidutiebaPagerUrl(testUrlPost, testPagerQuery);
+	}
+
+	@Test
+	public void testGetFenghuangluntanPagerUrl() {
+		FetchPager testObj = new FetchPager();
+
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div.numb_post2";
+
+		List<String> testList = testObj.getFenghuangluntanPagerUrl(testUrlPost,
+				testPagerQuery);
+		
+		for (String string : testList) {
+			System.out.println(string);
+		}
 	}
 }

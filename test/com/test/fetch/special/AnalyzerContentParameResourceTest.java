@@ -8,7 +8,7 @@ import com.ecis.model.ContentParame;
 public class AnalyzerContentParameResourceTest {
 
 	@Test
-	public void testGetAllContentParameValue() {
+	public void testGetAllContentParameValue_baidutieba() {
 		AnalyzerContentParameResource testObj = new AnalyzerContentParameResource();
 		testObj.setXmlResourcePath("./src/contentParameResource/baidutiebaParame.xml");
 

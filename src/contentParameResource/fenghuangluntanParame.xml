@@ -15,16 +15,16 @@
 		<value>getFenghuangluntanPagerUrl</value>
 	</element>
 	<element id="postDivQuery">
-		<value></value>
+		<value>div[class^=left_]</value>
 	</element>
 	<element id="postContentQuery">
-		<value></value>
+		<value>div[id^=postmessage]</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value></value>
+		<value>a[target=_blank]</value>
 	</element>
 	<element id="postTimeQuery">
-		<value></value>
+		<value>[class^=c]</value>
 	</element>
 	<element id="replyDivQuery">
 		<value></value>

@@ -1,9 +1,14 @@
 package com.test.fetch.impl;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import com.ecis.fetch.impl.FetchContentImpl;
@@ -22,7 +27,7 @@ public class FetchContentImplTest_BaiduTieBa {
 		// 建立测试对象，初始化帖子模版参数
 		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
-		testObj.initContentParame(null);
+		testObj.setDocPostFirstPage();
 
 		String baNameQuery = "a#tab_forumname";
 		testObj.getBaName(baNameQuery);
@@ -36,7 +41,7 @@ public class FetchContentImplTest_BaiduTieBa {
 
 		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
-		testObj.initContentParame(null);
+		testObj.setDocPostFirstPage();
 
 		String titleQuery = "h1.core_title_txt";
 		testObj.getTitle(titleQuery);
@@ -51,7 +56,7 @@ public class FetchContentImplTest_BaiduTieBa {
 
 		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
-		testObj.initContentParame(null);
+		testObj.setDocPostFirstPage();
 
 		String pagerQuery = "li.l_pager.pager_theme_2";
 		for (String strResult : testObj.getPagerUrl(strMethod, pagerQuery)) {
@@ -86,7 +91,7 @@ public class FetchContentImplTest_BaiduTieBa {
 
 		FetchContentImpl testObj = new FetchContentImpl();
 		// testObj.setPostLink(strPostLink);
-		// testObj.initContentParame(null);
+		// testObj.setDocPostFirstPage();
 
 		String postDivQuery = "div[class*=l_post]";
 		String postContentQuery = "div.p_content";
@@ -110,7 +115,7 @@ public class FetchContentImplTest_BaiduTieBa {
 
 		FetchContentImpl testObj = new FetchContentImpl();
 		testObj.setPostLink(strPostLink);
-		testObj.initContentParame(null);
+		testObj.setDocPostFirstPage();
 
 		String pagerQuery = "li[class*=l_pager]";
 		String postDivQuery = "div[class*=l_post]";
@@ -126,17 +131,31 @@ public class FetchContentImplTest_BaiduTieBa {
 				replyDivQuery, replyContentQuery, replyAuthorQuery,
 				replyTimeQuery);
 	}
-	
+
 	@Test
 	public void testGetAllContent() {
 		FetchContentImpl testObj = new FetchContentImpl();
-		
+
 		String postParameXMLFilePath = "./src/contentParameResource/baidutiebaParame.xml";
 		String strPostLink = new Scanner(System.in).next();
-		
+
 		testObj.setPostLink(strPostLink);
 		String strResult = testObj.getAllContent(postParameXMLFilePath);
-		
+
+		try {
+			File fileResult = new File("F:/testResult.txt");
+			if (!fileResult.exists()) {
+				fileResult.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(fileResult);
+			fw.write(strResult);
+
+			fw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		System.out.println(strResult);
 	}
 }

@@ -49,6 +49,14 @@ public class FetchPager {
 
 		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
 
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
 		Element elePagerDiv = docPager.select(pagerQuery).first();
 		String strLastPage = elePagerDiv.select("a[href*=viewthread]").last()
 				.attr("abs:href");
@@ -60,7 +68,7 @@ public class FetchPager {
 		int numPages = Integer.valueOf(strLastPage.substring(
 				strLastPage.indexOf("page=") + 5, strLastPage.length()));
 
-		for (int i = 1; i <= numPages; i++) {
+		for (int i = 2; i <= numPages; i++) {
 			String strEachPage = strPageModel + i;
 
 			listPagerUrl.add(strEachPage);

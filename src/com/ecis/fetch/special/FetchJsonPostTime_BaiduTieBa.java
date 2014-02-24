@@ -4,7 +4,7 @@ import net.sf.json.JSONObject;
 
 import org.jsoup.nodes.Element;
 
-public class FetchPostTime_BaiduTieBa {
+public class FetchJsonPostTime_BaiduTieBa {
 
 	public String getBaiduTieBaPostTime(Element eleBaiduTieBaPostDiv) {
 		String strDataField = eleBaiduTieBaPostDiv

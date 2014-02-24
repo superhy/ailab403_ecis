@@ -11,12 +11,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.ecis.fetch.special.AnalyzerContentParameResource;
-import com.ecis.fetch.special.FetchPostTime_BaiduTieBa;
+import com.ecis.fetch.special.FetchJsonPostTime_BaiduTieBa;
 import com.ecis.fetch.special.FetchPager;
+import com.ecis.fetch.special.SelectFinalQuery;
 import com.ecis.model.ContentParame;
 import com.ecis.util.JsoupDocumentUtil;
 
 public class FetchContentImpl {
+
+	// 选择最终cssQuery静态对象
+	private static SelectFinalQuery selectFinalQueryObj = new SelectFinalQuery();
 
 	// 页面链接
 	private static String postLink;
@@ -88,6 +92,8 @@ public class FetchContentImpl {
 		}
 
 		Document docBaName = getDocPostFirstPage();
+		// 在所有query项之前选择最终使用的query
+		baNameQuery = selectFinalQueryObj.getFinalQuery(docBaName, baNameQuery);
 		Element eleBaName = docBaName.select(baNameQuery).first();
 		strBaName = eleBaName.text() + "\r\n";
 
@@ -113,6 +119,8 @@ public class FetchContentImpl {
 		}
 
 		Document docTitle = getDocPostFirstPage();
+		// 在所有query项之前选择最终使用的query
+		titleQuery = selectFinalQueryObj.getFinalQuery(docTitle, titleQuery);
 		Element eleTitle = docTitle.select(titleQuery).first();
 		strTitle = eleTitle.text() + "\r\n";
 
@@ -146,6 +154,9 @@ public class FetchContentImpl {
 			Method methodGetBaidutiebaPagerUrl = classFetchPager.getMethod(
 					fetchPagerMethod, String.class, String.class);
 
+			// 在所有query项之前选择最终使用的query
+			pagerQuery = selectFinalQueryObj.getFinalQuery(
+					getDocPostFirstPage(), pagerQuery);
 			listPagerUrl = (List<String>) methodGetBaidutiebaPagerUrl.invoke(
 					classFetchPager.newInstance(), getPostLink(), pagerQuery);
 		} catch (Exception e) {
@@ -185,21 +196,33 @@ public class FetchContentImpl {
 		}
 
 		// 获取单个回复元素
+		// 在所有query项之前选择最终使用的query
+		replyDivQuery = selectFinalQueryObj.getFinalQuery(elePostDiv,
+				replyDivQuery);
 		Elements elesReplyDiv = elePostDiv.select(replyDivQuery);
 
 		for (Element eleReplyDiv : elesReplyDiv) {
 
 			// 获取回复作者信息
+			// 在所有query项之前选择最终使用的query
+			replyAuthorQuery = selectFinalQueryObj.getFinalQuery(eleReplyDiv,
+					replyAuthorQuery);
 			Element eleReplyAuthorDiv = eleReplyDiv.select(replyAuthorQuery)
 					.first();
 			String strReplyAuthor = eleReplyAuthorDiv.text();
 
 			// 获取回复内容信息
+			// 在所有query项之前选择最终使用的query
+			replyContentQuery = selectFinalQueryObj.getFinalQuery(eleReplyDiv,
+					replyContentQuery);
 			Element eleReplyContentDiv = eleReplyDiv.select(replyContentQuery)
 					.first();
 			String strReplyContent = eleReplyContentDiv.text();
 
 			// 获取回复时间信息
+			// 在所有query项之前选择最终使用的query
+			replyTimeQuery = selectFinalQueryObj.getFinalQuery(eleReplyDiv,
+					replyTimeQuery);
 			Element eleReplyTimeDiv = eleReplyDiv.select(replyTimeQuery)
 					.first();
 			String strReplyTime = eleReplyTimeDiv.text();
@@ -238,27 +261,39 @@ public class FetchContentImpl {
 		// 获取单独每页的文档信息
 		Document docEachPage = JsoupDocumentUtil.getDocument(pageUrl);
 		// 获取每个帖子div的元素集合
+		// 在所有query项之前选择最终使用的query
+		postDivQuery = selectFinalQueryObj.getFinalQuery(docEachPage,
+				postDivQuery);
 		Elements elesPostDiv = docEachPage.select(postDivQuery);
 		String strContentEachPage = "";
 
 		for (Element elePostDiv : elesPostDiv) {
 
 			// 获取跟帖作者信息
+			// 在所有query项之前选择最终使用的query
+			postAuthorQuery = selectFinalQueryObj.getFinalQuery(elePostDiv,
+					postAuthorQuery);
 			Element elePostAuthorDiv = elePostDiv.select(postAuthorQuery)
 					.first();
 			String strPostAuthor = elePostAuthorDiv.text();
 
 			// 获取帖子内容信息
+			// 在所有query项之前选择最终使用的query
+			postContentQuery = selectFinalQueryObj.getFinalQuery(elePostDiv,
+					postContentQuery);
 			Element elePostContentDiv = elePostDiv.select(postContentQuery)
 					.first();
 			String strPostContent = elePostContentDiv.text();
 
 			// 获取发帖时间及楼层信息
+			// 在所有query项之前选择最终使用的query
+			postTimeQuery = selectFinalQueryObj.getFinalQuery(elePostDiv,
+					postTimeQuery);
 			Element elePostTimeDiv = elePostDiv.select(postTimeQuery).first();
 			String strPostTime = elePostTimeDiv.text();
 			// 百度的发帖时间在javascript中显示，需要单独编写解析json的方法
 			if (pageUrl.indexOf("baidu") != -1) {
-				strPostTime += (new FetchPostTime_BaiduTieBa()
+				strPostTime += (new FetchJsonPostTime_BaiduTieBa()
 						.getBaiduTieBaPostTime(elePostDiv));
 			}
 
@@ -319,7 +354,7 @@ public class FetchContentImpl {
 		return strContentAllPost;
 	}
 
-	// 获取话题全部内容（待完成）
+	// 获取话题全部内容
 	public String getAllContent(String postParameXMLFilePath) {
 		initContentParame(postParameXMLFilePath);
 

@@ -62,10 +62,41 @@ public class FetchPager {
 
 		for (int i = 1; i <= numPages; i++) {
 			String strEachPage = strPageModel + i;
-			
+
 			listPagerUrl.add(strEachPage);
 		}
 
 		return listPagerUrl;
 	}
+
+	public List<String> getMaoputietiePagerUrl() {
+
+		return null;
+	}
+
+	public List<String> getPeopleshequPagerUrl() {
+
+		return null;
+	}
+
+	public List<String> getSinaluntanPagerUrl() {
+
+		return null;
+	}
+
+	public List<String> getSouhushequPagerUrl() {
+
+		return null;
+	}
+
+	public List<String> getTianyaluntanPagerUrl() {
+
+		return null;
+	}
+
+	public List<String> getWy163luntanPagerUrl() {
+
+		return null;
+	}
+
 }

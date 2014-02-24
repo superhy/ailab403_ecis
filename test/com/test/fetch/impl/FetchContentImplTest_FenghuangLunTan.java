@@ -118,7 +118,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strResult = testObj.getAllContent(postParameXMLFilePath);
 
 		try {
-			File fileResult = new File("F:/testResult.txt");
+			File fileResult = new File("./file/testResult.txt");
 			if (!fileResult.exists()) {
 				fileResult.createNewFile();
 			}

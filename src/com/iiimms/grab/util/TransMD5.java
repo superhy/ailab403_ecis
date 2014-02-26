@@ -1,4 +1,4 @@
-package com.iiimms.util;
+package com.iiimms.grab.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

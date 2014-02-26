@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.iiimms.fetch.special.GetPostPageList;
+import com.iiimms.fetch.util.GetPostPageList;
 
 public class GetPostPageListTest {
 

@@ -16,10 +16,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.iiimms.grab.thread.GetBaiduTieBaUrlThread;
+import com.iiimms.grab.util.ParseProperties;
+import com.iiimms.grab.util.TransMD5;
 import com.iiimms.model.Url;
 import com.iiimms.util.JsoupDocumentUtil;
-import com.iiimms.util.ParseProperties;
-import com.iiimms.util.TransMD5;
 
 public class GrabBaiduTieBaImpl {
 

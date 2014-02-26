@@ -10,9 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.iiimms.fetch.special.AnalyzerContentParameResource;
 import com.iiimms.fetch.special.FetchJsonPostTime_BaiduTieBa;
-import com.iiimms.fetch.special.GetPostPageList;
+import com.iiimms.fetch.util.AnalyzerContentParameResource;
+import com.iiimms.fetch.util.GetPostPageList;
 import com.iiimms.model.ContentParame;
 import com.iiimms.util.JsoupDocumentUtil;
 

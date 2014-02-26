@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.iiimms.util.ParseProperties;
+import com.iiimms.grab.util.ParseProperties;
 
 public class ParsePropertiesTest {
 	

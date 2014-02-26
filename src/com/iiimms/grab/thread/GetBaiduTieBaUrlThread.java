@@ -15,9 +15,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.iiimms.grab.util.TransMD5;
 import com.iiimms.model.Url;
 import com.iiimms.util.JsoupDocumentUtil;
-import com.iiimms.util.TransMD5;
 
 public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 	private Url url;

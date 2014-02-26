@@ -1,4 +1,4 @@
-package com.iiimms.fetch.special;
+package com.iiimms.fetch.util;
 
 import java.io.File;
 

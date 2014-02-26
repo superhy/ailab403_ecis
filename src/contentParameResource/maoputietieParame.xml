@@ -3,39 +3,39 @@
 <parame-info version="1.0" refreshtime="2014-02-24 16:51:00">
     
     <element id="baNameQuery">
-		<value></value>
+		<value>div.mbx>div.inn</value>
 	</element>
 	<element id="titleQuery">
-		<value></value>
+		<value>h1[id*=title]</value>
 	</element>
 	<element id="pagerQuery">
-		<value></value>
+		<value>div.page</value>
 	</element>
 	<element id="fetchPagerMethod">
-		<value></value>
+		<value>getMaoputietiePagerUrl</value>
 	</element>
 	<element id="postDivQuery">
-		<value></value>
+		<value>div.tzbdP</value>
 	</element>
 	<element id="postContentQuery">
-		<value></value>
+		<value>div#js-sub-body</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value></value>
+		<value>div.name</value>
 	</element>
 	<element id="postTimeQuery">
-		<value></value>
+		<value>span.date</value>
 	</element>
 	<element id="replyDivQuery">
-		<value></value>
+		<value>div.box2.js-reply</value>
 	</element>
 	<element id="replyContentQuery">
-		<value></value>
+		<value>div.h_nr.js-reply-body</value>
 	</element>
 	<element id="replyAuthorQuery">
-		<value></value>
+		<value>a.h_yh</value>
 	</element>
 	<element id="replyTimeQuery">
-		<value></value>
+		<value>div.h_lz</value>
 	</element>
 </parame-info>

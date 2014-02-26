@@ -6,8 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
 
-import com.ecis.fetch.special.FetchJsonPostTime_BaiduTieBa;
-import com.ecis.util.JsoupDocumentUtil;
+import com.iiimms.fetch.special.FetchJsonPostTime_BaiduTieBa;
+import com.iiimms.util.JsoupDocumentUtil;
 
 public class FetchBaiduTieBaPostTimeTest {
 

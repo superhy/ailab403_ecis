@@ -1,4 +1,4 @@
-package com.ecis.util;
+package com.iiimms.util;
 
 import java.io.IOException;
 

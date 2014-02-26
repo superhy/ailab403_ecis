@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.fetch.impl.FetchContentImpl;
+import com.iiimms.fetch.impl.FetchContentImplBasic;
 
 public class FetchContentImplTest_FenghuangLunTan {
 
@@ -18,7 +18,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strPostLink = cin.next();
 
 		// 建立测试对象，初始化帖子模版参数
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -32,7 +32,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -47,7 +47,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strMethod = "getFenghuangluntanPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -63,7 +63,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 		// testObj.setPostLink(strPostLink);
 		// testObj.initContentParame(null);
 
@@ -88,7 +88,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strMethod = "getFenghuangluntanPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -109,7 +109,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 
 	@Test
 	public void testGetAllContent() {
-		FetchContentImpl testObj = new FetchContentImpl();
+		FetchContentImplBasic testObj = new FetchContentImplBasic();
 
 		String postParameXMLFilePath = "./src/contentParameResource/fenghuangluntanParame.xml";
 		String strPostLink = new Scanner(System.in).next();

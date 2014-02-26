@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.fetch.special.FetchPager;
+import com.iiimms.fetch.special.GetPostPageList;
 
-public class FetchPagerTest {
+public class GetPostPageListTest {
 
 	@Test
 	public void testGetBaidutiebaPagerUrl() {
-		FetchPager testObj = new FetchPager();
+		GetPostPageList testObj = new GetPostPageList();
 
 		Scanner cin = new Scanner(System.in);
 		String testUrlPost = cin.next();
@@ -22,7 +22,7 @@ public class FetchPagerTest {
 
 	@Test
 	public void testGetFenghuangluntanPagerUrl() {
-		FetchPager testObj = new FetchPager();
+		GetPostPageList testObj = new GetPostPageList();
 
 		Scanner cin = new Scanner(System.in);
 		String testUrlPost = cin.next();
@@ -30,7 +30,28 @@ public class FetchPagerTest {
 
 		List<String> testList = testObj.getFenghuangluntanPagerUrl(testUrlPost,
 				testPagerQuery);
+
+		for (String string : testList) {
+			System.out.println(string);
+		}
+	}
+	
+	@Test
+	public void testGetKaidiSheQuPagerUrl() {
 		
+	}
+
+	@Test
+	public void testGetMaopuTieTiePagerUrl() {
+		GetPostPageList testObj = new GetPostPageList();
+
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div.page";
+
+		List<String> testList = testObj.getMaoputietiePagerUrl(testUrlPost,
+				testPagerQuery);
+
 		for (String string : testList) {
 			System.out.println(string);
 		}

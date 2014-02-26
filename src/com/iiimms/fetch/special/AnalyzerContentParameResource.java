@@ -1,4 +1,4 @@
-package com.ecis.fetch.special;
+package com.iiimms.fetch.special;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.ecis.model.ContentParame;
+import com.iiimms.model.ContentParame;
 
 public class AnalyzerContentParameResource {
 

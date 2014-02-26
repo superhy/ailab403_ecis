@@ -1,4 +1,4 @@
-package com.ecis.fetch;
+package com.iiimms.fetch;
 
 public interface FetchContent {
 

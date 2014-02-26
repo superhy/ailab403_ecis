@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.util.TransMD5;
+import com.iiimms.util.TransMD5;
 
 public class TransMD5Test {
 

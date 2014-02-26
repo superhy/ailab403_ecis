@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.grab.impl.GrabBaiduTieBaImpl;
-import com.ecis.grab.thread.GetBaiduTieBaUrlThread;
+import com.iiimms.grab.impl.GrabBaiduTieBaImpl;
+import com.iiimms.grab.thread.GetBaiduTieBaUrlThread;
 
 public class GrabBaiduTieBaUrlThreadTest_Main {
 

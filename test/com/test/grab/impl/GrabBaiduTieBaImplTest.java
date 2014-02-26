@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.ecis.grab.impl.GrabBaiduTieBaImpl;
+import com.iiimms.grab.impl.GrabBaiduTieBaImpl;
 
 public class GrabBaiduTieBaImplTest {
 

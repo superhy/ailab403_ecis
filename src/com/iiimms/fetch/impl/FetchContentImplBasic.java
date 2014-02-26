@@ -1,4 +1,4 @@
-package com.ecis.fetch.impl;
+package com.iiimms.fetch.impl;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -10,13 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.ecis.fetch.special.AnalyzerContentParameResource;
-import com.ecis.fetch.special.FetchJsonPostTime_BaiduTieBa;
-import com.ecis.fetch.special.FetchPager;
-import com.ecis.model.ContentParame;
-import com.ecis.util.JsoupDocumentUtil;
+import com.iiimms.fetch.special.AnalyzerContentParameResource;
+import com.iiimms.fetch.special.FetchJsonPostTime_BaiduTieBa;
+import com.iiimms.fetch.special.GetPostPageList;
+import com.iiimms.model.ContentParame;
+import com.iiimms.util.JsoupDocumentUtil;
 
-public class FetchContentImpl {
+public class FetchContentImplBasic {
 
 	// 页面链接
 	private static String postLink;
@@ -49,7 +49,7 @@ public class FetchContentImpl {
 
 	// 初始化帖子页面文档变量
 	public static void setDocPostFirstPage() {
-		FetchContentImpl.docPostFirstPage = JsoupDocumentUtil
+		FetchContentImplBasic.docPostFirstPage = JsoupDocumentUtil
 				.getDocument(postLink);
 	}
 
@@ -88,7 +88,7 @@ public class FetchContentImpl {
 		}
 
 		Document docBaName = getDocPostFirstPage();
-		Element eleBaName = docBaName.select(baNameQuery).first();
+		Element eleBaName = docBaName.select(baNameQuery).first();	
 		strBaName = eleBaName != null ? eleBaName.text() : "" + "\r\n";
 
 		// System.out.println(strBaName);
@@ -134,7 +134,7 @@ public class FetchContentImpl {
 
 		// 反射机制获取类名
 		try {
-			classFetchPager = Class.forName(new FetchPager().getClass()
+			classFetchPager = Class.forName(new GetPostPageList().getClass()
 					.getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

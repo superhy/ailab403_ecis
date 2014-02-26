@@ -1,4 +1,4 @@
-package com.ecis.grab.thread;
+package com.iiimms.grab.thread;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,9 +15,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.ecis.model.Url;
-import com.ecis.util.JsoupDocumentUtil;
-import com.ecis.util.TransMD5;
+import com.iiimms.model.Url;
+import com.iiimms.util.JsoupDocumentUtil;
+import com.iiimms.util.TransMD5;
 
 public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 	private Url url;

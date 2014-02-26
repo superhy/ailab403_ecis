@@ -2,8 +2,8 @@ package com.test.fetch.special;
 
 import org.junit.Test;
 
-import com.ecis.fetch.special.AnalyzerContentParameResource;
-import com.ecis.model.ContentParame;
+import com.iiimms.fetch.special.AnalyzerContentParameResource;
+import com.iiimms.model.ContentParame;
 
 public class AnalyzerContentParameResourceTest {
 

@@ -1,4 +1,4 @@
-package com.ecis.model;
+package com.iiimms.model;
 
 public class ContentParame {
 

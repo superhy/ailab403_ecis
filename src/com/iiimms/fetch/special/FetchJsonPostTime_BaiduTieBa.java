@@ -1,4 +1,4 @@
-package com.ecis.fetch.special;
+package com.iiimms.fetch.special;
 
 import net.sf.json.JSONObject;
 

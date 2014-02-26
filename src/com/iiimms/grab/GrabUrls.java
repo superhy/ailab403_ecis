@@ -1,4 +1,4 @@
-package com.ecis.grab;
+package com.iiimms.grab;
 
 public interface GrabUrls {
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <parame-info version="1.0" refreshtime="2014-02-24 16:51:00">
-    
-    <element id="baNameQuery">
+
+	<element id="baNameQuery">
 		<value>div.mbx>div.inn</value>
 	</element>
 	<element id="titleQuery">

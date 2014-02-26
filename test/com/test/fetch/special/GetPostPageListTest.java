@@ -35,10 +35,10 @@ public class GetPostPageListTest {
 			System.out.println(string);
 		}
 	}
-	
+
 	@Test
 	public void testGetKaidiSheQuPagerUrl() {
-		
+
 	}
 
 	@Test
@@ -50,6 +50,38 @@ public class GetPostPageListTest {
 		String testPagerQuery = "div.page";
 
 		List<String> testList = testObj.getMaoputietiePagerUrl(testUrlPost,
+				testPagerQuery);
+
+		for (String string : testList) {
+			System.out.println(string);
+		}
+	}
+
+	@Test
+	public void testGetPeopleSheQuPagerUrl() {
+		GetPostPageList testObj = new GetPostPageList();
+
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div.pageBar";
+
+		List<String> testList = testObj.getPeopleshequPagerUrl(testUrlPost,
+				testPagerQuery);
+
+		for (String string : testList) {
+			System.out.println(string);
+		}
+	}
+
+	@Test
+	public void testGetSinaluntanPagerUrl() {
+		GetPostPageList testObj = new GetPostPageList();
+
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div.pages";
+
+		List<String> testList = testObj.getSinaluntanPagerUrl(testUrlPost,
 				testPagerQuery);
 
 		for (String string : testList) {

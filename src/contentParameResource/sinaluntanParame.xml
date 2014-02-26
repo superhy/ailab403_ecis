@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <parame-info version="1.0" refreshtime="2014-02-24 16:51:00">
-    
-    <element id="baNameQuery">
-		<value></value>
+
+	<element id="baNameQuery">
+		<value>div#nav>a[href^=forumdisplay]</value>
 	</element>
 	<element id="titleQuery">
-		<value></value>
+		<value>span[id^=posttitle]</value>
 	</element>
 	<element id="pagerQuery">
-		<value></value>
+		<value>div.pages</value>
 	</element>
 	<element id="fetchPagerMethod">
-		<value></value>
+		<value>getSinaluntanPagerUrl</value>
 	</element>
 	<element id="postDivQuery">
-		<value></value>
+		<value>div[id^=floor]</value>
 	</element>
 	<element id="postContentQuery">
-		<value></value>
+		<value>div[id^=postmessage]</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value></value>
+		<value>div.myInfo_up>a.f14</value>
 	</element>
 	<element id="postTimeQuery">
-		<value></value>
+		<value>div.myInfo_up>font</value>
 	</element>
 	<element id="replyDivQuery">
 		<value></value>

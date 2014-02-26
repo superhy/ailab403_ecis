@@ -88,7 +88,7 @@ public class FetchContentImplBasic {
 		}
 
 		Document docBaName = getDocPostFirstPage();
-		Element eleBaName = docBaName.select(baNameQuery).first();	
+		Element eleBaName = docBaName.select(baNameQuery).first();
 		strBaName = eleBaName != null ? eleBaName.text() : "" + "\r\n";
 
 		// System.out.println(strBaName);

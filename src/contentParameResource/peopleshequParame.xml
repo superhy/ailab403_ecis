@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <parame-info version="1.0" refreshtime="2014-02-24 16:51:00">
-    
-    <element id="baNameQuery">
-		<value></value>
+
+	<element id="baNameQuery">
+		<value>div.wrapNavBar.clearfix>a[href*=board]</value>
 	</element>
 	<element id="titleQuery">
-		<value></value>
+		<value>div.navBar>h2</value>
 	</element>
 	<element id="pagerQuery">
-		<value></value>
+		<value>div.pageBar</value>
 	</element>
 	<element id="fetchPagerMethod">
-		<value></value>
+		<value>getPeopleshequPagerUrl</value>
 	</element>
 	<element id="postDivQuery">
-		<value></value>
+		<value>p.treeTitle,ul.subUL>li</value>
 	</element>
 	<element id="postContentQuery">
-		<value></value>
+		<value>a.treeReply</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value></value>
+		<value>a[class=userNick]</value>
 	</element>
 	<element id="postTimeQuery">
-		<value></value>
+		<value>span:not(.showSubreply)</value>
 	</element>
 	<element id="replyDivQuery">
-		<value></value>
+		<value>ul.subUL>li</value>
 	</element>
 	<element id="replyContentQuery">
-		<value></value>
+		<value>a.treeReply</value>
 	</element>
 	<element id="replyAuthorQuery">
-		<value></value>
+		<value>a[class=userNick]</value>
 	</element>
 	<element id="replyTimeQuery">
-		<value></value>
+		<value>span</value>
 	</element>
 </parame-info>

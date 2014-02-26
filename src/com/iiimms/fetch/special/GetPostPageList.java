@@ -64,14 +64,12 @@ public class GetPostPageList {
 		// System.out.println(strLastPage);
 
 		String strPageModel = strLastPage.substring(0,
-				strLastPage.indexOf("page=") + 5);
+				strLastPage.lastIndexOf("=") + 1);
 		int numPages = Integer.valueOf(strLastPage.substring(
-				strLastPage.indexOf("page=") + 5, strLastPage.length()));
+				strLastPage.lastIndexOf("=") + 1, strLastPage.length()));
 
 		for (int i = 2; i <= numPages; i++) {
-			String strEachPage = strPageModel + i;
-
-			listPagerUrl.add(strEachPage);
+			listPagerUrl.add(strPageModel + i);
 		}
 
 		return listPagerUrl;
@@ -101,9 +99,9 @@ public class GetPostPageList {
 		while (elePagerDiv.select("a.end").size() != 0) {
 			String strNextPage = elePagerDiv.select("a.end").first()
 					.attr("abs:href");
-			
+
 			listPagerUrl.add(strNextPage);
-			
+
 			docPager = JsoupDocumentUtil.getDocument(strNextPage);
 			elePagerDiv = docPager.select(pagerQuery).first();
 		}
@@ -113,12 +111,65 @@ public class GetPostPageList {
 
 	public List<String> getPeopleshequPagerUrl(String urlPost, String pagerQuery) {
 
-		return null;
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
+
+		String strPageModel = urlPost.substring(0, urlPost.indexOf("_") + 1);
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		String strPagerJavaScript = elePagerDiv.select("script[type^=text]")
+				.first().toString();
+		int numPages = Integer
+				.parseInt(""
+						+ strPagerJavaScript.charAt(strPagerJavaScript
+								.indexOf(',') + 1));
+
+		for (int i = 2; i <= numPages; i++) {
+			listPagerUrl.add(strPageModel + i);
+		}
+
+		return listPagerUrl;
 	}
 
 	public List<String> getSinaluntanPagerUrl(String urlPost, String pagerQuery) {
 
-		return null;
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		String strLastPage = elePagerDiv.select("a:not(.next)").last()
+				.attr("abs:href");
+
+		String strPageModel = strLastPage.substring(0,
+				strLastPage.lastIndexOf("=") + 1);
+		int numPages = Integer.valueOf(strLastPage.substring(
+				strLastPage.lastIndexOf("=") + 1, strLastPage.length()));
+
+		for (int i = 2; i <= numPages; i++) {
+			listPagerUrl.add(strPageModel + i);
+		}
+
+		return listPagerUrl;
 	}
 
 	public List<String> getSouhushequPagerUrl(String urlPost, String pagerQuery) {

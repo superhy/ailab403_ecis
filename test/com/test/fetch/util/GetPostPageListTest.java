@@ -1,4 +1,4 @@
-package com.test.fetch.special;
+package com.test.fetch.util;
 
 import java.util.List;
 import java.util.Scanner;

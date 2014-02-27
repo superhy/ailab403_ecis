@@ -1,4 +1,4 @@
-package com.test.fetch.special;
+package com.test.fetch.util;
 
 import org.junit.Test;
 

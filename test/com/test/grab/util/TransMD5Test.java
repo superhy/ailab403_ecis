@@ -1,4 +1,4 @@
-package com.test.util;
+package com.test.grab.util;
 
 import static org.junit.Assert.*;
 

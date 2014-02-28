@@ -219,8 +219,6 @@ public class GetPostPageList {
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
 
-		System.out.println(docPager);
-
 		// 假如只有一页，没有分页信息的情况
 		if (docPager.select(pagerQuery).size() == 0) {
 
@@ -239,7 +237,31 @@ public class GetPostPageList {
 	public List<String> getTianyaluntanPagerUrl(String urlPost,
 			String pagerQuery) {
 
-		return null;
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
+
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		while (elePagerDiv.select("a.js-keyboard-next").size() != 0) {
+			String strNextPage = elePagerDiv.select("a.js-keyboard-next")
+					.first().attr("abs:href");
+
+			listPagerUrl.add(strNextPage);
+
+			docPager = BasicJsoupDocumentUtil.getDocument(strNextPage);
+			elePagerDiv = docPager.select(pagerQuery).first();
+		}
+
+		return listPagerUrl;
 	}
 
 	public List<String> getWy163luntanPagerUrl(String urlPost, String pagerQuery) {

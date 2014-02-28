@@ -89,7 +89,7 @@ public class BasicFetchContentImpl implements FetchContent {
 		Element eleBaName = docBaName.select(baNameQuery).first();
 		strBaName = eleBaName != null ? eleBaName.text() : "" + "\r\n";
 
-		// System.out.println(strBaName);
+		// System.out.println(docBaName);
 
 		return strBaName;
 	}

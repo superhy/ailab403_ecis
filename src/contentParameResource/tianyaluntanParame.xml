@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <parame-info version="1.0" refreshtime="2014-02-24 16:51:00">
-    
-    <element id="baNameQuery">
-		<value></value>
+
+	<element id="baNameQuery">
+		<value>p.crumbs a[href*=list]</value>
 	</element>
 	<element id="titleQuery">
-		<value></value>
+		<value>span.s_title>span</value>
 	</element>
 	<element id="pagerQuery">
-		<value></value>
+		<value>div.atl-pages</value>
 	</element>
 	<element id="fetchPagerMethod">
-		<value></value>
+		<value>getTianyaluntanPagerUrl</value>
 	</element>
 	<element id="postDivQuery">
-		<value></value>
+		<value>div#bd</value>
 	</element>
 	<element id="postContentQuery">
-		<value></value>
+		<value>div[class^=bbs-content]</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value></value>
+		<value>a[uname]</value>
 	</element>
 	<element id="postTimeQuery">
-		<value></value>
+		<value>div.atl-info>span:containsOwn(时间)</value>
 	</element>
 	<element id="replyDivQuery">
-		<value></value>
+		<value>div[js_username]</value>
 	</element>
 	<element id="replyContentQuery">
-		<value></value>
+		<value>div.bbs-content</value>
 	</element>
 	<element id="replyAuthorQuery">
-		<value></value>
+		<value>a[uname]</value>
 	</element>
 	<element id="replyTimeQuery">
-		<value></value>
+		<value>div.atl-info>span:containsOwn(时间)</value>
 	</element>
 </parame-info>

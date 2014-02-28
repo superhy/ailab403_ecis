@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.iiimms.fetch.impl.FetchContentImplBasic;
+import com.iiimms.fetch.impl.BasicFetchContentImpl;
 
 public class FetchContentImplTest_FenghuangLunTan {
 
@@ -18,7 +18,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strPostLink = cin.next();
 
 		// 建立测试对象，初始化帖子模版参数
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -32,7 +32,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -47,7 +47,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strMethod = "getFenghuangluntanPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -63,7 +63,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		// testObj.setPostLink(strPostLink);
 		// testObj.initContentParame(null);
 
@@ -88,7 +88,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strMethod = "getFenghuangluntanPagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -109,7 +109,7 @@ public class FetchContentImplTest_FenghuangLunTan {
 
 	@Test
 	public void testGetAllContent() {
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 
 		String postParameXMLFilePath = "./src/contentParameResource/fenghuangluntanParame.xml";
 		String strPostLink = new Scanner(System.in).next();
@@ -118,7 +118,8 @@ public class FetchContentImplTest_FenghuangLunTan {
 		String strResult = testObj.getAllContent(postParameXMLFilePath);
 
 		try {
-			File fileResult = new File("./file/testResult.txt");
+			File fileResult = new File(
+					"./file/content/testFenghuangContent.txt");
 			if (!fileResult.exists()) {
 				fileResult.createNewFile();
 			}

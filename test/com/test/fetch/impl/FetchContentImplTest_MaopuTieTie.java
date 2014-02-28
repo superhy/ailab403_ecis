@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.iiimms.fetch.impl.FetchContentImplBasic;
+import com.iiimms.fetch.impl.BasicFetchContentImpl;
 
 public class FetchContentImplTest_MaopuTieTie {
 
@@ -17,28 +17,28 @@ public class FetchContentImplTest_MaopuTieTie {
 		String strPostLink = cin.next();
 
 		// 建立测试对象，初始化帖子模版参数
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
 		String baNameQuery = "div.mbx>div.inn";
 		System.out.println(testObj.getBaName(baNameQuery));
 	}
-	
+
 	@Test
 	public void testGetTitle() {
-		
+
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
 		String titleQuery = "h1[id*=title]";
 		System.out.println(testObj.getTitle(titleQuery));
 	}
-	
+
 	@Test
 	public void testGetPagerUrl() {
 
@@ -46,7 +46,7 @@ public class FetchContentImplTest_MaopuTieTie {
 		String strMethod = "getMaoputietiePagerUrl";
 		String strPostLink = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		testObj.setPostLink(strPostLink);
 		testObj.setDocPostFirstPage();
 
@@ -55,14 +55,14 @@ public class FetchContentImplTest_MaopuTieTie {
 			System.out.println(strResult);
 		}
 	}
-	
+
 	@Test
 	public void testGetContentEachPager() {
 
 		Scanner cin = new Scanner(System.in);
 		String strPageUrl = cin.next();
 
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 		// testObj.setPostLink(strPostLink);
 		// testObj.initContentParame(null);
 
@@ -79,10 +79,10 @@ public class FetchContentImplTest_MaopuTieTie {
 				replyDivQuery, replyContentQuery, replyAuthorQuery,
 				replyTimeQuery));
 	}
-	
+
 	@Test
 	public void testGetAllContent() {
-		FetchContentImplBasic testObj = new FetchContentImplBasic();
+		BasicFetchContentImpl testObj = new BasicFetchContentImpl();
 
 		String postParameXMLFilePath = "./src/contentParameResource/maoputietieParame.xml";
 		String strPostLink = new Scanner(System.in).next();
@@ -91,7 +91,7 @@ public class FetchContentImplTest_MaopuTieTie {
 		String strResult = testObj.getAllContent(postParameXMLFilePath);
 
 		try {
-			File fileResult = new File("./file/testResult.txt");
+			File fileResult = new File("./file/content/testMaopuContent.txt");
 			if (!fileResult.exists()) {
 				fileResult.createNewFile();
 			}

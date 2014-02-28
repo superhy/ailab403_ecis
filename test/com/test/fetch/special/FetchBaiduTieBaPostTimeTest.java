@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.junit.Test;
 
 import com.iiimms.fetch.special.FetchJsonPostTime_BaiduTieBa;
-import com.iiimms.util.JsoupDocumentUtil;
+import com.iiimms.util.BasicJsoupDocumentUtil;
 
 public class FetchBaiduTieBaPostTimeTest {
 
@@ -18,7 +18,7 @@ public class FetchBaiduTieBaPostTimeTest {
 		Scanner cin = new Scanner(System.in);
 		String strPostLink = cin.next();
 
-		Document docBaiduTieBaPost = JsoupDocumentUtil.getDocument(strPostLink);
+		Document docBaiduTieBaPost = BasicJsoupDocumentUtil.getDocument(strPostLink);
 		Element eleBaiduTieBaPostDiv = docBaiduTieBaPost.select(
 				"div[class*=l_post]").first();
 		

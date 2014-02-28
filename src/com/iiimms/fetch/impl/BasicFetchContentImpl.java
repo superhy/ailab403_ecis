@@ -1,31 +1,30 @@
 package com.iiimms.fetch.impl;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.iiimms.fetch.FetchContent;
 import com.iiimms.fetch.special.FetchJsonPostTime_BaiduTieBa;
 import com.iiimms.fetch.util.AnalyzerContentParameResource;
 import com.iiimms.fetch.util.GetPostPageList;
 import com.iiimms.model.ContentParame;
-import com.iiimms.util.JsoupDocumentUtil;
+import com.iiimms.util.BasicJsoupDocumentUtil;
 
-public class FetchContentImplBasic {
+public class BasicFetchContentImpl implements FetchContent {
 
 	// 页面链接
-	private static String postLink;
+	private String postLink;
 
 	// 页面元素信息
-	private static ContentParame cntParame;
+	private ContentParame cntParame;
 
 	// 页面文档加载项
-	private static Document docPostFirstPage;
+	private Document docPostFirstPage;
 
 	public String getPostLink() {
 		return postLink;
@@ -43,14 +42,13 @@ public class FetchContentImplBasic {
 		this.cntParame = cntParame;
 	}
 
-	public static Document getDocPostFirstPage() {
+	public Document getDocPostFirstPage() {
 		return docPostFirstPage;
 	}
 
 	// 初始化帖子页面文档变量
-	public static void setDocPostFirstPage() {
-		FetchContentImplBasic.docPostFirstPage = JsoupDocumentUtil
-				.getDocument(postLink);
+	public void setDocPostFirstPage() {
+		this.docPostFirstPage = BasicJsoupDocumentUtil.getDocument(postLink);
 	}
 
 	/**
@@ -193,7 +191,7 @@ public class FetchContentImplBasic {
 			Element eleReplyAuthorDiv = eleReplyDiv.select(replyAuthorQuery)
 					.first();
 			String strReplyAuthor = eleReplyAuthorDiv != null ? eleReplyAuthorDiv
-					.text() : "";
+					.ownText() : "";
 
 			// 获取回复内容信息
 			Element eleReplyContentDiv = eleReplyDiv.select(replyContentQuery)
@@ -205,7 +203,7 @@ public class FetchContentImplBasic {
 			Element eleReplyTimeDiv = eleReplyDiv.select(replyTimeQuery)
 					.first();
 			String strReplyTime = eleReplyTimeDiv != null ? eleReplyTimeDiv
-					.text() : "";
+					.ownText() : "";
 
 			// 将分析出来的各部分内容组合
 			strReplyContentEachPost += ("replyAuthor: " + strReplyAuthor
@@ -252,7 +250,7 @@ public class FetchContentImplBasic {
 		}
 
 		// 获取单独每页的文档信息
-		Document docEachPage = JsoupDocumentUtil.getDocument(pageUrl);
+		Document docEachPage = BasicJsoupDocumentUtil.getDocument(pageUrl);
 		// 获取每个帖子div的元素集合
 		Elements elesPostDiv = docEachPage.select(postDivQuery);
 
@@ -262,7 +260,7 @@ public class FetchContentImplBasic {
 			Element elePostAuthorDiv = elePostDiv.select(postAuthorQuery)
 					.first();
 			String strPostAuthor = elePostAuthorDiv != null ? elePostAuthorDiv
-					.text() : "";
+					.ownText() : "";
 
 			// 获取帖子内容信息
 			Element elePostContentDiv = elePostDiv.select(postContentQuery)
@@ -272,8 +270,8 @@ public class FetchContentImplBasic {
 
 			// 获取发帖时间及楼层信息
 			Element elePostTimeDiv = elePostDiv.select(postTimeQuery).first();
-			String strPostTime = elePostTimeDiv != null ? elePostTimeDiv.text()
-					: "";
+			String strPostTime = elePostTimeDiv != null ? elePostTimeDiv
+					.ownText() : "";
 
 			// 百度的发帖时间在javascript中显示，需要单独编写解析json的方法
 			if (pageUrl.indexOf("baidu") != -1) {

@@ -21,7 +21,7 @@
 		<value>div#js-sub-body</value>
 	</element>
 	<element id="postAuthorQuery">
-		<value>div.name</value>
+		<value>div.name>a.fcB</value>
 	</element>
 	<element id="postTimeQuery">
 		<value>span.date</value>

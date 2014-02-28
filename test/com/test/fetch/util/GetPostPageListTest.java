@@ -38,7 +38,18 @@ public class GetPostPageListTest {
 
 	@Test
 	public void testGetKaidiSheQuPagerUrl() {
+		GetPostPageList testObj = new GetPostPageList();
 
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div.pagesmodule";
+
+		List<String> testList = testObj.getKaidiSheQuPagerUrl(testUrlPost,
+				testPagerQuery);
+
+		for (String string : testList) {
+			System.out.println(string);
+		}
 	}
 
 	@Test
@@ -87,5 +98,22 @@ public class GetPostPageListTest {
 		for (String string : testList) {
 			System.out.println(string);
 		}
+	}
+
+	@Test
+	public void testGetSouhushequPagerUrl() {
+		GetPostPageList testObj = new GetPostPageList();
+
+		Scanner cin = new Scanner(System.in);
+		String testUrlPost = cin.next();
+		String testPagerQuery = "div[class*=pages]";
+
+		List<String> testList = testObj.getSouhushequPagerUrl(testUrlPost,
+				testPagerQuery);
+
+		/*
+		 * for (String string : testList) { System.out.println(string); }
+		 */
+
 	}
 }

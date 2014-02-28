@@ -7,7 +7,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.iiimms.util.JsoupDocumentUtil;
+import com.iiimms.util.BasicJsoupDocumentUtil;
+import com.iiimms.util.HttpClientJsoupDocumentUtil;
 
 public class GetPostPageList {
 
@@ -15,7 +16,7 @@ public class GetPostPageList {
 		// 容器存放分页链接
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
@@ -47,7 +48,7 @@ public class GetPostPageList {
 
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
@@ -77,14 +78,51 @@ public class GetPostPageList {
 
 	public List<String> getKaidiSheQuPagerUrl(String urlPost, String pagerQuery) {
 
-		return null;
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = HttpClientJsoupDocumentUtil.getDocument(urlPost);
+
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		String strBoolenNext = elePagerDiv.select("a[href^=dispbbs]").last()
+				.text();
+		if (strBoolenNext.equals("下一页")) {
+			while (strBoolenNext.equals("下一页")) {
+				String strNextPage = "http://club.kdnet.net/"
+						+ elePagerDiv.select("a[href^=dispbbs]").last()
+								.attr("href");
+				listPagerUrl.add(strNextPage);
+
+				docPager = HttpClientJsoupDocumentUtil.getDocument(strNextPage);
+				elePagerDiv = docPager.select(pagerQuery).first();
+
+				strBoolenNext = elePagerDiv.select("a[href^=dispbbs]").last()
+						.text();
+			}
+		} else {
+			Elements elesPageList = elePagerDiv.select("a");
+			for (Element eleEachPage : elesPageList) {
+				listPagerUrl.add("http://club.kdnet.net/"
+						+ eleEachPage.attr("href"));
+			}
+		}
+
+		return listPagerUrl;
 	}
 
 	public List<String> getMaoputietiePagerUrl(String urlPost, String pagerQuery) {
 
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
@@ -102,7 +140,7 @@ public class GetPostPageList {
 
 			listPagerUrl.add(strNextPage);
 
-			docPager = JsoupDocumentUtil.getDocument(strNextPage);
+			docPager = BasicJsoupDocumentUtil.getDocument(strNextPage);
 			elePagerDiv = docPager.select(pagerQuery).first();
 		}
 
@@ -113,7 +151,7 @@ public class GetPostPageList {
 
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
@@ -145,7 +183,7 @@ public class GetPostPageList {
 
 		List<String> listPagerUrl = new ArrayList<String>();
 
-		Document docPager = JsoupDocumentUtil.getDocument(urlPost);
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
 
 		// 根据总的链接数得出每个分页的链接，第一页就是当前页
 		listPagerUrl.add(urlPost);
@@ -173,6 +211,27 @@ public class GetPostPageList {
 	}
 
 	public List<String> getSouhushequPagerUrl(String urlPost, String pagerQuery) {
+
+		List<String> listPagerUrl = new ArrayList<String>();
+
+		Document docPager = BasicJsoupDocumentUtil.getDocument(urlPost);
+
+		// 根据总的链接数得出每个分页的链接，第一页就是当前页
+		listPagerUrl.add(urlPost);
+
+		System.out.println(docPager);
+
+		// 假如只有一页，没有分页信息的情况
+		if (docPager.select(pagerQuery).size() == 0) {
+
+			return listPagerUrl;
+		}
+
+		Element elePagerDiv = docPager.select(pagerQuery).first();
+		String strLastPage = elePagerDiv.select("a")
+				.get(elePagerDiv.select("a").size() - 1).attr("abs:href");
+
+		System.out.println(strLastPage);
 
 		return null;
 	}

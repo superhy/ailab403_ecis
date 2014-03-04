@@ -2,6 +2,8 @@ package com.iiimms.model;
 
 public class ContentParame {
 
+	// 采集器固化技术参数
+
 	private String baNameQuery; // 贴吧名cssQuery
 	private String titleQuery; // 贴吧标题cssQuery
 	private String pagerQuery; // 分页信息cssQuery

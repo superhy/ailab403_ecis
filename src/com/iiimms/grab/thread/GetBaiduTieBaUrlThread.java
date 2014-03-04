@@ -15,15 +15,95 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.iiimms.grab.util.GetThemePageList;
 import com.iiimms.grab.util.TransMD5;
 import com.iiimms.model.Url;
 import com.iiimms.util.BasicJsoupDocumentUtil;
+import com.test.fetch.util.GetPostPageListTest;
 
 public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 	private Url url;
 
 	public GetBaiduTieBaUrlThread(Url url) {
 		this.url = url;
+	}
+
+	// 根据每一页的分页url获取该页所有帖子url
+	public Set<Url> getPostUrl(String urlSinglePage) throws Exception {
+		Document docSinglePage = BasicJsoupDocumentUtil
+				.getDocument(urlSinglePage);
+
+		Set<Url> listUrlPost = new HashSet<Url>();
+		Elements elesPost = docSinglePage
+				.select("div.threadlist_text.threadlist_title.j_th_tit*");
+
+		// System.out.println(elesPost.size());
+
+		for (Element elePost : elesPost) {
+			String urlPost = elePost.select("a[href]").attr("abs:href");
+			String urlPostMD5 = new TransMD5().getMD5Code(urlPost);
+
+			Url urlModelPost = new Url(urlPost, urlPostMD5);
+
+			listUrlPost.add(urlModelPost);
+
+			// System.out.println(urlPost);
+		}
+
+		return listUrlPost;
+	}
+
+	@Override
+	public Set<Url> call() throws Exception {
+		// 创建连接，获取下一层的全部元素
+		// Document docLevel_01 = Jsoup.connect(url.getUrl()).timeout(600000)
+		// .ignoreHttpErrors(true).get();
+		// String urlLastPage_Level_01 = docLevel_01
+		// .getElementsByClass("pagination").select("a[href]").last().attr("abs:href");
+		//
+		// List<String> urlPageList_Level_01 =
+		// anayPagination(urlLastPage_Level_01);
+		//
+		// for (String urlEachPage_Level_01 : urlPageList_Level_01) {
+		// Document docEachPage_Level_01 = Jsoup.connect(urlEachPage_Level_01)
+		// .timeout(600000).ignoreHttpErrors(true).get();
+		//
+		// Elements elesLevel_01 = docEachPage_Level_01
+		// .select("[class*=ba_href]");
+		//
+		// FileWriter fw = new FileWriter(new File(
+		// "./file/baidutieba_ba_urlList.txt"));
+		// for (Element eleLevel_01 : elesLevel_01) {
+		// String urlLevel_02 = eleLevel_01.attr("abs:href");
+		//
+		// fw.write(urlLevel_02 + "\r\n");
+		// System.out.println(urlLevel_02);
+		// }
+		//
+		// fw.close();
+
+		// }
+
+		String urlBa = url.getUrl();
+
+		// 创建帖子url库文件
+		Document docTitle_Ba = BasicJsoupDocumentUtil.getDocument(urlBa);
+
+		// 获取贴吧计划抓取的所有分页url
+		Set<String> listUrlPage = anayPagination(urlBa);
+
+		// 预防贴吧被封的情况
+		if (listUrlPage == null) {
+			return null;
+		}
+
+		Set<Url> listUrlPost_Ba = new HashSet<Url>();
+
+		for (String urlSinglePage : listUrlPage) {
+			listUrlPost_Ba.addAll(getPostUrl(urlSinglePage));
+		}
+
+		return listUrlPost_Ba;
 	}
 
 	// 通过最后一页获得总页数，拼接出所有全部页面url
@@ -75,8 +155,8 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 			numPageNow++;
 
 			// 将分页区域元素更新为下一页所指向页面的分页区域元素
-			elePager = BasicJsoupDocumentUtil.getDocument(urlNext).getElementById(
-					"frs_list_pager");
+			elePager = BasicJsoupDocumentUtil.getDocument(urlNext)
+					.getElementById("frs_list_pager");
 		}
 
 		for (String string : listUrlPage) {
@@ -84,81 +164,5 @@ public class GetBaiduTieBaUrlThread implements Callable<Set<Url>> {
 		}
 
 		return listUrlPage;
-	}
-
-	// 根据每一页的分页url获取该页所有帖子url
-	public Set<Url> getPostUrl(String urlSinglePage) throws Exception {
-		Document docSinglePage = BasicJsoupDocumentUtil.getDocument(urlSinglePage);
-
-		Set<Url> listUrlPost = new HashSet<Url>();
-		Elements elesPost = docSinglePage
-				.select("div.threadlist_text.threadlist_title.j_th_tit*");
-
-		// System.out.println(elesPost.size());
-
-		for (Element elePost : elesPost) {
-			String urlPost = elePost.select("a[href]").attr("abs:href");
-			String urlPostMD5 = new TransMD5().getMD5Code(urlPost);
-
-			Url urlModelPost = new Url(urlPost, urlPostMD5);
-
-			listUrlPost.add(urlModelPost);
-
-			// System.out.println(urlPost);
-		}
-
-		return listUrlPost;
-	}
-
-	@Override
-	public Set<Url> call() throws Exception {
-		// 创建连接，获取下一层的全部元素
-		// Document docLevel_01 = Jsoup.connect(url.getUrl()).timeout(600000)
-		// .ignoreHttpErrors(true).get();
-		// String urlLastPage_Level_01 = docLevel_01
-		// .getElementsByClass("pagination").select("a[href]").last().attr("abs:href");
-		//
-		// List<String> urlPageList_Level_01 =
-		// anayPagination(urlLastPage_Level_01);
-		//
-		// for (String urlEachPage_Level_01 : urlPageList_Level_01) {
-		// Document docEachPage_Level_01 = Jsoup.connect(urlEachPage_Level_01)
-		// .timeout(600000).ignoreHttpErrors(true).get();
-		//
-		// Elements elesLevel_01 = docEachPage_Level_01
-		// .select("[class*=ba_href]");
-		//
-		// FileWriter fw = new FileWriter(new File(
-		// "./file/baidutieba_ba_urlList.txt"));
-		// for (Element eleLevel_01 : elesLevel_01) {
-		// String urlLevel_02 = eleLevel_01.attr("abs:href");
-		//
-		// fw.write(urlLevel_02 + "\r\n");
-		// System.out.println(urlLevel_02);
-		// }
-		//
-		// fw.close();
-		// }
-
-		String urlBa = url.getUrl();
-
-		// 创建帖子url库文件
-		Document docTitle_Ba = BasicJsoupDocumentUtil.getDocument(urlBa);
-
-		// 获取贴吧计划抓取的所有分页url
-		Set<String> listUrlPage = anayPagination(urlBa);
-
-		// 预防贴吧被封的情况
-		if (listUrlPage == null) {
-			return null;
-		}
-
-		Set<Url> listUrlPost_Ba = new HashSet<Url>();
-
-		for (String urlSinglePage : listUrlPage) {
-			listUrlPost_Ba.addAll(getPostUrl(urlSinglePage));
-		}
-
-		return listUrlPost_Ba;
 	}
 }
